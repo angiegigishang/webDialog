@@ -1,0 +1,77 @@
+.g-dialog-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	/*display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;*/
+	display: -webkit-flex;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+	z-index: 1000;
+}
+
+.g-dialog-container .dialog-window {
+	padding: 1em;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.8);
+	-webkit-transition: all .3s ease;
+}
+
+.g-dialog-container .dialog-window .dialog-header {
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+	background-size: 50px;
+}
+
+.g-dialog-container .dialog-window .ok {
+	background: url("img/dui.png") no-repeat;
+	background-size: 50px;
+}
+
+.g-dialog-container .dialog-window .warning {
+	background: url("img/gantan.png") no-repeat;
+	background-size: 50px;
+}
+
+.g-dialog-container .dialog-window .waiting {
+	background: url("img/wait.gif") no-repeat;
+	background-size: 50px;
+}
+
+.g-dialog-container .dialog-window .dialog-content {
+	padding: 1em 1em 0;
+	color: white;
+	line-height: 180%;
+	text-align: center;
+}
+
+.g-dialog-container .dialog-window .dialog-footer {
+	padding: 1em 1em 0;
+	display: -webkit-flex;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+}
+
+.g-dialog-container .dialog-window .dialog-footer button{
+	-webkit-appearance: noraml;
+	/*background-color: rgba(255, 255, 255, 0.8);*/
+	padding: 0.8em 1.8em;
+	border: none;
+	color: #eee;
+	border-radius: 5px;
+	margin: 0.3em;
+	text-shadow: #666 1px 1px 0;
+}
+
+.g-dialog-container .dialog-window .dialog-footer .green {
+	background-color: rgba(2, 202, 200, 0.8);
+}
+
+.g-dialog-container .dialog-window .dialog-footer .red {
+	background-color: rgba(251, 23, 50, 0.8);
+}

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- 移动端无缩放 -->
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="telephone=no, email=no"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<!-- 删除苹果默认的工具栏和菜单栏 -->
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<!-- 设置苹果工具栏颜色 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="telephone=no, email=no"/>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-size: 12px;
+			padding: 20px;
+		}
+
+		#btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn8, #btn9, #btn10, #btn7{
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin: 20px 0;
+			background-color: green;
+			border-radius: 10px;
+			color: white;
+			border: 1px solid #eee;
+		}
+
+		#div {
+			position: fixed;
+			width: 50px;
+			height: 50px;
+			background-color: red;
+			z-index: 100;
+		}
+	</style>
+	<!-- <link href="dialog.css" rel="stylesheet" type="text/css"> -->
+	<link href="dialog2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<!-- <div class="g-dialog-container">
+		<div class="dialog-window">
+			<div class="dialog-header waiting"></div>
+			<div class="dialog-content">你是否要清空购物车？</div>
+			<div class="dialog-footer">
+				<button class="green">按钮1</button>
+				<button class="red">按钮2</button>
+				<button>按钮3</button>
+			</div>
+		</div>
+	</div> -->
+
+	<!-- <div id="div">我是一个层级很高的元素</div> -->
+
+	<button id="btn9" style="background-color: red">延时关闭加回调</button>
+	<button id="btn10" style="background-color: red">遮罩层点击是否可以关闭</button>
+
+	<button id="btn7">CSS自定义</button>
+
+	<button id="btn8">弹出一个框</button>
+	<button id="btn1">没有传递任何参数（需手动关闭）</button>
+	<button id="btn2">弹出一个不带任何按钮，且是警告的框，并且2秒后自动关闭</button>
+	<button id="btn3">弹出一个有确认和取消按钮的成功框，点击按钮直接关闭</button>
+	<button id="btn4">弹出一个有确认按钮的警告框，点击按钮不关闭（需手动关闭）</button>
+	<button id="btn5">弹出一个多组合的按钮框，且按钮样式可定制</button>
+	<button id="btn6">弹出一个确认和删除的框，点击确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭</button>
+
+
+ 	<script src="zepto.js"></script>
+ 	<script src="zepto.dialog.js"></script>
+
+ 	<script>
+
+ 		$("#btn10").click(function() {
+ 			$.dialog({
+ 				type: "warning",
+ 				message: "遮罩层点击是否可以关闭",
+ 				buttons:[
+ 					{
+ 						text: "按钮A",
+ 						type: "green"
+ 					},
+ 					{
+ 						text: "按钮B",
+ 						callback: function() {
+ 							//alert("点击我不会关闭")
+ 							return false;
+ 						}
+ 					}
+ 				],
+ 				maskOpacity: 0.4,
+ 				maskClose: true				
+ 			})
+ 		})
+
+ 		$("#btn9").click(function() {
+ 			$.dialog({
+ 				type: "warning",
+ 				message: "延时关闭加回调",
+ 				delay: 2000,
+ 				delayCallback: function(){
+ 					alert("1111")
+ 				}
+ 			})
+ 		})
+
+ 		$("#btn7").click(function(){
+ 			$.dialog({
+ 			type: "waiting",
+ 			message: "我叫等待对话框",
+ 			buttons: [
+ 				{type: "green",
+ 				text: "你好吗"},
+ 				{type: "red",
+ 				text: "我不好"}
+ 			]
+ 		})
+ 		});
+
+ 		$("#btn1").click(function() {
+
+ 			var d = $.dialog();
+
+ 		});
+
+ 		$("#btn2").click(function() {
+ 			var d = $.dialog({
+ 				type: "warning",
+ 				message: "2秒后关闭",
+ 				delay: 2000,
+ 				effect: true
+ 			})
+ 		});
+
+ 		$("#btn3").click(function() {
+ 			var d = $.dialog({
+ 				type: "ok",
+ 				message: "2秒后关闭",
+ 				buttons: [
+ 					{
+ 						text: "确认"
+ 					},
+ 					{
+ 						text: "取消"
+ 					}
+ 				],
+ 				delay: 2000
+ 			});
+ 		});
+
+ 		$("#btn4").click(function() {
+ 			var d = $.dialog({
+ 				type: "warning",
+ 				effect: true,
+ 				message: "我叫警告框",
+ 				buttons: [
+ 					{
+ 						text: "确认",
+ 						type: "red",
+ 						callback: function() {
+ 							alert("点击我不会关闭")
+ 							return false;
+ 						}
+ 					}
+ 				],
+ 			});
+ 		});
+
+ 		$("#btn5").click(function() {
+ 			var d = $.dialog({
+ 				type: "waiting",
+ 				message: "多组合按钮",
+ 				buttons: [
+ 					{
+ 						text: "确认",
+ 						type: "red",
+ 						callback: function() {
+ 							alert("点击我不会关闭")
+ 							return false;
+ 						}
+ 					},
+ 					{
+ 						text: "好的",
+ 						type: "green",
+ 						callback: function() {
+ 							alert("点击我会关闭")
+ 						}
+ 					},
+ 					{
+ 						text: "默认",
+ 						callback: function() {
+ 							alert("点击我会关闭")
+ 						}
+ 					}
+ 				],
+ 			});
+ 		});
+
+ 		$("#btn6").click(function() {
+ 			var d = $.dialog({
+ 				type: "waiting",
+ 				message: "多组合按钮",
+ 				buttons: [
+ 					{
+ 						text: "确认",
+ 						type: "green",
+ 						callback: function() {
+
+ 							$.dialog({
+ 								type: "waiting",
+ 								delay: 2000
+ 							});
+
+ 							return false;
+ 						}
+ 					},
+ 					{
+ 						text: "删除",
+ 						type: "red",
+ 						callback: function() {
+
+ 							$.dialog({
+ 								type: "ok",
+ 								buttons: [
+ 									{
+	 									text: "删除之前的弹框",
+	 									callback: function() {
+	 										d.close();
+	 										return false;
+ 									}
+ 								}
+ 								]
+ 							});
+
+ 							return false;
+ 						}
+ 					}
+ 				],
+ 			});
+ 		});
+
+ 		$('#btn8').click(function() {
+ 			$.dialog({
+ 				type: "warning",
+ 				message: "我是第一个弹框",
+ 				buttons:[
+ 					{
+ 						type: "green",
+ 						text: "弹出第二个框",
+ 						callback: function() {
+ 							$.dialog({
+ 								type: "warning",
+ 								message: "我是第二个框"
+ 							})
+ 						}
+ 					},
+ 					{
+ 						type: "red",
+ 						text: "弹出第三个框",
+ 						callback: function() {
+ 							$.dialog({
+ 								type: "warning",
+ 								message: "我是第三个框"
+ 							})
+ 						}
+ 					}
+ 				],
+ 				effect: true
+ 			})
+ 		})
+
+
+ 		/*var d = $.dialog({
+ 			//width: 100,
+			//height: 50,
+			//对话框提示信息
+			message: "你还好吗",
+			//对话框类型
+			type: "waiting",
+			//按钮配置
+			buttons: [
+						{
+						type: "red",
+						text: "不好",
+						callback: function(){
+							alert(1000);
+
+							return false;
+						  }
+						},
+						{
+						type: "green",
+						text: "好啊",
+						callback: function(){
+							alert(2000)
+						  }
+					    }						
+			         ],
+			//弹出框延迟多久关闭
+			//delay: 3000,
+			//对话框遮罩层透明度
+			maskOpacity: 0.5
+ 		});*/
+ 	</script>
+</body>
+</html>
